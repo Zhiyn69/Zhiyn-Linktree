@@ -1,119 +1,246 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="id" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <title>Linktree</title>
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhiyn | Linktree</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkblue: {
+                            900: '#0f172a', // slate-900
+                            950: '#020617', // slate-950
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
+    <!-- FontAwesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
+<body class="bg-blue-50 dark:bg-darkblue-950 text-slate-800 dark:text-white transition-colors duration-500 min-h-screen relative overflow-x-hidden">
 
-<html lang="en">
+    <!-- Background Decorative Elements -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <!-- Dark mode blobs -->
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-0 dark:opacity-20 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-indigo-600 rounded-full mix-blend-multiply filter blur-3xl opacity-0 dark:opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl opacity-0 dark:opacity-20 animate-blob animation-delay-4000"></div>
+        
+        <!-- Light mode blobs -->
+        <div class="absolute top-10 right-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 dark:opacity-0 transition-opacity duration-500 animate-blob"></div>
+        <div class="absolute bottom-10 left-10 w-64 h-64 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-60 dark:opacity-0 transition-opacity duration-500 animate-blob animation-delay-2000"></div>
+    </div>
 
-<head>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="absolute top-4 right-4 z-50 p-3 rounded-full bg-white/30 dark:bg-black/30 glass-panel shadow-lg hover:scale-110 transition-transform duration-300 border border-white/20 dark:border-slate-700/50 text-slate-800 dark:text-yellow-400 focus:outline-none">
+        <i id="theme-icon" class="fas fa-sun text-xl"></i>
+    </button>
 
-  <link rel="stylesheet" href="style.css">
+    <!-- Main Content -->
+    <main class="relative z-10 max-w-xl mx-auto px-6 py-16 flex flex-col items-center min-h-screen">
+        
+        <!-- Profile Section -->
+        <div class="flex flex-col items-center mb-10 animate-[fadeIn_1s_ease-out]">
+            <div class="relative group">
+                <!-- Avatar Ring Glow -->
+                <div class="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-500"></div>
+                <!-- Profile Image (Using a cool blue avatar placeholder as Zhiyn) -->
+                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Zhiyn&backgroundColor=0284c7" 
+                     alt="Zhiyn Profile" 
+                     class="relative w-28 h-28 object-cover rounded-full border-4 border-white dark:border-darkblue-900 shadow-xl transition-transform duration-300 group-hover:scale-105">
+            </div>
+            
+            <h1 class="mt-5 text-3xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
+                Zhiyn
+                <i class="fas fa-circle-check text-blue-500 text-lg" title="Verified"></i>
+            </h1>
+            <p class="mt-2 text-sm text-slate-600 dark:text-blue-200 text-center font-medium max-w-sm">
+                Digital Creator | Visual Editor | Tech Enthusiast<br>
+                <span class="text-xs opacity-75">Connect with me on my socials below 🚀</span>
+            </p>
+        </div>
 
-  <meta charset="UTF-8">
+        <!-- Links Container -->
+        <div class="w-full flex flex-col gap-4">
 
-  <title>Zhiyn | Content Creator</title>
+            <!-- Portfolio -->
+            <a href="https://adz-portofolio.vercel.app/" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(139,92,246,0.4)] bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 overflow-hidden">
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xNSIvPgo8L3N2Zz4=')] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-white/10 rounded-full blur-xl group-hover:bg-white/20 transition-colors duration-500"></div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 text-white backdrop-blur-sm shadow-inner relative z-10">
+                    <i class="fas fa-laptop-code text-xl"></i>
+                </div>
+                <div class="ml-4 text-white font-bold flex-grow text-lg relative z-10">Portfolio Website</div>
+                <i class="fas fa-arrow-right text-white/50 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1 relative z-10"></i>
+                <!-- Badge -->
+                <div class="absolute top-0 right-0 bg-gradient-to-l from-yellow-400 to-yellow-300 text-yellow-900 text-[10px] font-bold px-3 py-1 rounded-bl-lg rounded-tr-2xl z-10 shadow-sm">
+                    MAIN
+                </div>
+            </a>
 
-  <style>
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/18hUnkiAvk/" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(24,119,242,0.3)] bg-gradient-to-r from-[#1877F2] to-[#0a56b5] overflow-hidden">
+                <div class="absolute right-0 top-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-10 -mt-10 blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 text-white backdrop-blur-sm shadow-inner">
+                    <i class="fab fa-facebook-f text-2xl"></i>
+                </div>
+                <div class="ml-4 text-white font-semibold flex-grow text-lg">Facebook</div>
+                <i class="fas fa-arrow-right text-white/50 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1"></i>
+            </a>
 
-    body {
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/dzzzyyyy?igsh=MW1rMW11bms0eWN2bg==" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(225,48,108,0.3)] bg-gradient-to-tr from-[#FFDC80] via-[#F56040] to-[#C13584] overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 text-white backdrop-blur-sm shadow-inner">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </div>
+                <div class="ml-4 text-white font-semibold flex-grow text-lg">Instagram</div>
+                <i class="fas fa-arrow-right text-white/50 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1"></i>
+            </a>
 
-      background: #111;
+            <!-- TikTok -->
+            <a href="https://vt.tiktok.com/ZSHUAm4sa" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(0,242,254,0.3)] bg-[#010101] border-l-4 border-[#00f2fe] border-r-4 border-[#fe0979] overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#00f2fe]/10 to-[#fe0979]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 text-white backdrop-blur-sm shadow-inner relative z-10">
+                    <i class="fab fa-tiktok text-xl"></i>
+                </div>
+                <div class="ml-4 text-white font-semibold flex-grow text-lg relative z-10 tracking-wide drop-shadow-md">TikTok</div>
+                <i class="fas fa-arrow-right text-white/50 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1 relative z-10"></i>
+            </a>
 
-      color: #fff;
+            <!-- Threads -->
+            <a href="https://www.threads.com/@dzzzyyyy" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-gradient-to-br from-neutral-800 to-black dark:from-white dark:to-neutral-200 border border-white/10 dark:border-black/10 overflow-hidden">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1)_0,transparent_50%)] dark:bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.05)_0,transparent_50%)] scale-0 group-hover:scale-150 transition-transform duration-700"></div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/10 dark:bg-black/5 text-white dark:text-black backdrop-blur-sm shadow-inner relative z-10">
+                    <i class="fab fa-threads text-2xl"></i>
+                </div>
+                <div class="ml-4 text-white dark:text-black font-semibold flex-grow text-lg relative z-10">Threads</div>
+                <i class="fas fa-arrow-right text-white/50 dark:text-black/50 group-hover:text-white dark:group-hover:text-black transition-colors duration-300 group-hover:translate-x-1 relative z-10"></i>
+            </a>
 
-      font-family: sans-serif;
+            <!-- GitHub -->
+            <a href="https://github.com/Zhiyn69" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(255,255,255,0.1)] bg-[#2b3137] overflow-hidden">
+                <div class="absolute bottom-0 right-0 opacity-10 group-hover:opacity-20 transition-opacity duration-300 transform translate-y-4 translate-x-4">
+                    <i class="fab fa-github text-8xl text-white"></i>
+                </div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-black/40 text-white backdrop-blur-sm shadow-inner relative z-10">
+                    <i class="fab fa-github text-2xl"></i>
+                </div>
+                <div class="ml-4 text-white font-semibold flex-grow text-lg relative z-10">GitHub</div>
+                <i class="fas fa-arrow-right text-white/50 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1 relative z-10"></i>
+            </a>
 
-      display: flex;
+            <!-- Reddit -->
+            <a href="https://www.reddit.com/u/Zhiynn/s/naTuCEW9kV" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(255,69,0,0.3)] bg-gradient-to-r from-[#FF4500] to-[#FF871D] overflow-hidden">
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')] opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 text-white backdrop-blur-sm shadow-inner relative z-10">
+                    <i class="fab fa-reddit-alien text-2xl"></i>
+                </div>
+                <div class="ml-4 text-white font-semibold flex-grow text-lg relative z-10">Reddit</div>
+                <i class="fas fa-arrow-right text-white/50 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1 relative z-10"></i>
+            </a>
 
-      flex-direction: column;
+            <!-- WhatsApp -->
+            <a href="https://api.whatsapp.com/message/GCZVT5GPVHY4I1?autoload=1&app_absent=0" target="_blank" rel="noopener noreferrer" 
+               class="group relative w-full flex items-center p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(37,211,102,0.3)] bg-gradient-to-r from-[#128C7E] to-[#25D366] overflow-hidden">
+                <div class="absolute w-full h-full bg-white/10 -skew-x-12 -ml-20 group-hover:translate-x-[200%] transition-transform duration-700 ease-in-out"></div>
+                <div class="flex items-center justify-center w-12 h-12 rounded-full bg-white/20 text-white backdrop-blur-sm shadow-inner relative z-10">
+                    <i class="fab fa-whatsapp text-2xl"></i>
+                </div>
+                <div class="ml-4 text-white font-semibold flex-grow text-lg relative z-10">WhatsApp Business</div>
+                <i class="fas fa-arrow-right text-white/50 group-hover:text-white transition-colors duration-300 group-hover:translate-x-1 relative z-10"></i>
+            </a>
 
-      align-items: center;
+        </div>
 
-      padding: 30px;
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-sm text-slate-500 dark:text-slate-400">
+            <p>&copy; 2026 Zhiyn. All rights reserved.</p>
+        </footer>
+    </main>
 
-    }
+    <!-- Script for Dark/Light Mode Toggle -->
+    <script>
+        const htmlElement = document.documentElement;
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
 
-    h1 {
+        // Function to set icon based on current theme
+        const updateIcon = () => {
+            if (htmlElement.classList.contains('dark')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                themeToggleBtn.classList.add('text-yellow-400');
+                themeToggleBtn.classList.remove('text-indigo-600');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                themeToggleBtn.classList.remove('text-yellow-400');
+                themeToggleBtn.classList.add('text-indigo-600');
+            }
+        };
 
-      margin-bottom: 5px;
+        // Initialize icon
+        updateIcon();
 
-    }
-
-    p {
-
-      margin-top: 0;
-
-      color: #ccc;
-
-    }
-
-    a {
-
-      text-decoration: none;
-
-      background: #333;
-
-      color: white;
-
-      padding: 12px 20px;
-
-      margin: 10px;
-
-      border-radius: 10px;
-
-      display: block;
-
-      width: 250px;
-
-      text-align: center;
-
-      transition: 0.2s;
-
-    }
-
-    a:hover {
-
-      background: #555;
-
-    }
-
-  </style>
-
-</head>
-
-  <link rel="stylesheet" href="style.css">
-
-<body>
-
-<img src="https://i.postimg.cc/N0kq7CcD/Background-Eraser-20250701-185727844.png" alt="Avatar" class="avatar">
-
-  <h1>Zhiyn | Content Creator</h1>
-
-  <p>Playing some games, And sharing abt that 😁</p>
-
-  <a class="link-button"
-
-href="https://www.instagram.com/zzzzhiyn?igsh=MW1rMW11bms0eWN2bg==" target="_blank">📸 Instagram</a>
-
-  <a class="link-button" href="https://youtube.com/@zhiynmp4?si=N4NiTu2SvwvGIlLp" target="_blank">▶️ YouTube</a>
-
-  <a class="link-button" href="https://www.tiktok.com/@dyzziyy_?_t=ZS-8yMoxUAwldA&_r=1" target="_blank">🎵 TikTok</a>
-
-  <a class="link-button" href="https://www.facebook.com/share/1Dhe2h4zwT/" target="_blank">📘 Facebook</a>
-
-  <a class="link-button" href="https://wa.me/qr/TUL62ID6I6FGB1" target="_blank">💬 WhatsApp</a>
-
-</body>
-
-</html>
-<!-- partial -->
-  
+        // Toggle theme on click
+        themeToggleBtn.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            updateIcon();
+        });
+    </script>
 </body>
 </html>
